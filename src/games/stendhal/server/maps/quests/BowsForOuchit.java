@@ -196,8 +196,9 @@ ask for horse hair.
 		 */
 		SpeakerNPC npc = npcs.get("Karl");
 
+		// the phrase "horse hairs" should achieve the same effect as "Ouchit"
 		npc.add(ConversationStates.ATTENDING,
-				"Ouchit",
+				Arrays.asList("Ouchit", "horse hairs"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"hair"),
 								new NotCondition (new PlayerHasItemWithHimCondition("horse hair",1))),
 				ConversationStates.ATTENDING,
