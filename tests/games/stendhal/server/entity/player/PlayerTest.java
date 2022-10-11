@@ -524,7 +524,7 @@ public class PlayerTest {
 	 * Test that the player is notified if their pet is too far away when trying to change zone
 	 */
 	@Test
-	public void testPetTooFar() {
+	public void testTooFar() {
 		final StendhalRPZone zone = new StendhalRPZone("zone");
 		MockStendlRPWorld.get().addRPZone(zone);
 		SheepTestHelper.generateRPClasses();
@@ -540,15 +540,15 @@ public class PlayerTest {
 		//This will fail if no action is set on the player
 		String result = player.events().get(0).get("text");
 		
-		//Sheep Guy is not on a server, so the message won't actually go through, but this confirms that the player did try to send a message to themself
+		//Sheep Guy is not on a server, so the message won't actually go through, but it confirms that the player did try to send a message to themself
 		assertThat(result, is("No player named " + player.getName() + " is currently active. Please use postman to send a message to " + player.getName()));
 	}
 	
 	/*
-	 * Test that the player receives no message if they can leave the zone
+	 * Test that the player doesn't receive a message if their pet isn't too far away when they try to leave a zone
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testPetNotTooFar() {
+	public void testNotTooFar() {
 		final StendhalRPZone zone = new StendhalRPZone("zone");
 		MockStendlRPWorld.get().addRPZone(zone);
 		SheepTestHelper.generateRPClasses();
@@ -561,9 +561,7 @@ public class PlayerTest {
 		player.setPosition(0, 0);
 		sheep.setPosition(0, 0);
 		player.isZoneChangeAllowed();
-		
-		//This will fail if no action is set on the player, which is what we want
+		//This will fail if no action is set on the player
 		player.events().get(0).get("text");
 	}
-	 
 }
