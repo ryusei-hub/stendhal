@@ -34,6 +34,7 @@ import games.stendhal.common.constants.Nature;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.Outfit;
+import games.stendhal.server.entity.creature.Sheep;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.maps.MockStendhalRPRuleProcessor;
@@ -41,6 +42,7 @@ import games.stendhal.server.maps.MockStendlRPWorld;
 import marauroa.common.game.RPObject;
 import marauroa.server.game.db.DatabaseFactory;
 import utilities.PlayerTestHelper;
+import utilities.RPClass.SheepTestHelper;
 
 public class PlayerTest {
 	private String playername = "player";
@@ -517,4 +519,51 @@ public class PlayerTest {
 		int magicSkillXpLater = player.getMagicSkillXp(Nature.LIGHT);
 		assertThat(magicSkillXpLater, is(0));
 	}
+	
+	/**
+	 * Test that the player is notified if their pet is too far away when trying to change zone
+	 */
+	@Test
+	public void testPetTooFar() {
+		final StendhalRPZone zone = new StendhalRPZone("zone");
+		MockStendlRPWorld.get().addRPZone(zone);
+		SheepTestHelper.generateRPClasses();
+		final Sheep sheep = new Sheep();
+
+		zone.add(sheep);
+		final Player player = PlayerTestHelper.createPlayer("Sheep Guy");
+		zone.add(player);
+		player.setSheep(sheep);
+		player.setPosition(0, 0);
+		sheep.setPosition(20, 20);
+		player.isZoneChangeAllowed();
+		//This will fail if no action is set on the player
+		String result = player.events().get(0).get("text");
+		
+		//Sheep Guy is not on a server, so the message won't actually go through, but this confirms that the player did try to send a message to themself
+		assertThat(result, is("No player named " + player.getName() + " is currently active. Please use postman to send a message to " + player.getName()));
+	}
+	
+	/*
+	 * Test that the player receives no message if they can leave the zone
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testPetNotTooFar() {
+		final StendhalRPZone zone = new StendhalRPZone("zone");
+		MockStendlRPWorld.get().addRPZone(zone);
+		SheepTestHelper.generateRPClasses();
+		final Sheep sheep = new Sheep();
+
+		zone.add(sheep);
+		final Player player = PlayerTestHelper.createPlayer("Sheep Guy");
+		zone.add(player);
+		player.setSheep(sheep);
+		player.setPosition(0, 0);
+		sheep.setPosition(0, 0);
+		player.isZoneChangeAllowed();
+		
+		//This will fail if no action is set on the player, which is what we want
+		player.events().get(0).get("text");
+	}
+	 
 }
