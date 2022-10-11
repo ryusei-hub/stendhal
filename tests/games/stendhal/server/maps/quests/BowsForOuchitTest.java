@@ -152,6 +152,9 @@ public class BowsForOuchitTest {
 
 		en.step(player, "horse hairs");
 		assertEquals("Hello, hello! Ouchit needs more horse hairs from my horses? No problem, here you are. Send Ouchit greetings from me.", getReply(npc));
+		assertTrue(player.isEquipped("horse hair"));
+		// need to drop the item to make sure that the other conversation starter works
+		player.drop("horse hair");
 
 		en.step(player, "ouchit");
 		assertEquals("Hello, hello! Ouchit needs more horse hairs from my horses? No problem, here you are. Send Ouchit greetings from me.", getReply(npc));
