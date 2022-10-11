@@ -1683,6 +1683,11 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (sheep != null) {
 			if (squaredDistance(sheep) > 7 * 7) {
+				final RPAction action = new RPAction();
+				final TellAction tell = new TellAction();
+				action.put("target", getName());
+				action.put("text", "My pet is too far away");
+				tell.onAction(this, action);
 				return false;
 			}
 		}
@@ -1691,6 +1696,11 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (pet != null) {
 			if (squaredDistance(pet) > 7 * 7) {
+				final RPAction action = new RPAction();
+				final TellAction tell = new TellAction();
+				action.put("target", getName());
+				action.put("text", "My pet is too far away");
+				tell.onAction(this, action);
 				return false;
 			}
 		}
