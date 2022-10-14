@@ -129,7 +129,7 @@ public class OutfitLender2NPC implements ZoneConfigurator {
 					}
 
 					@Override
-					public void putOnOutfit(final Player player, final String outfitType) {
+					public void putOnOutfit(final Player player, final String outfitType, int index) {
 
 						final Pair<Outfit, Boolean> outfitPair = outfitTypes.get(outfitType);
 						final Outfit outfit = outfitPair.first();
@@ -169,7 +169,7 @@ public class OutfitLender2NPC implements ZoneConfigurator {
 
 						if (player.isEquipped("money", charge)) {
 							player.drop("money", charge);
-							putOnOutfit(player, outfitType);
+							putOnOutfit(player, outfitType, -1);
 							return true;
 						} else {
 							seller.say("Sorry, you don't have enough money!");
