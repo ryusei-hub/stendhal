@@ -59,7 +59,7 @@ public class FishSoupTest {
 
 	@Test
 	public void testQuest() {
-
+		
 		npc = SingletonRepository.getNPCList().get("Florence Boullabaisse");
 		en = npc.getEngine();
 		player.setXP(100);

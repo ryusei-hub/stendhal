@@ -33,7 +33,14 @@ public class TeleportToAction extends AdministrationAction {
 	@Override
 	public void perform(final Player player, final RPAction action) {
 		if (action.has(TARGET)) {
-			final String name = action.get(TARGET);
+			String nameTemp;
+			if(action.get(TARGET).equals("Florence Bouillabaisse")) {
+				nameTemp = "Florence Boullabaisse";
+			}
+			else {
+				nameTemp = action.get(TARGET);
+			}
+			final String name = nameTemp;
 			RPEntity teleported = SingletonRepository.getRuleProcessor().getPlayer(name);
 
 			if (teleported == null) {
