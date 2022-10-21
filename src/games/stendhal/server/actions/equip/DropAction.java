@@ -17,15 +17,19 @@ import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPAction;
-
 public class DropAction extends EquipmentAction {
+	
 	public static void register() {
 		CommandCenter.register("drop", new DropAction());
 	}
 
 	@Override
 	protected void execute(final Player player, final RPAction action, final SourceObject source) {
-
+		
+		if(player.getZone().getName().equals("int_semos_wizards_tower_1")) {
+			return;
+		};
+		
 		// get destination and check it
 		final DestinationObject dest = new DestinationObject(action, player);
 		if (!dest.checkDistance(player, EquipUtil.MAX_THROWING_DISTANCE)) {
@@ -38,7 +42,7 @@ public class DropAction extends EquipmentAction {
 			// destination is not valid
 			return;
 		}
-
+		
 		final Entity entity = source.getEntity();
 		final String itemName = source.getEntityName();
 
