@@ -26,9 +26,9 @@ public class DropAction extends EquipmentAction {
 	@Override
 	protected void execute(final Player player, final RPAction action, final SourceObject source) {
 		
-		if(player.getZone().getName().equals("int_semos_wizards_tower_1")) {
-			return;
-		};
+//		if(player.getZone().getName().equals("int_semos_wizards_tower_1")) {
+//			return;
+//		};
 		
 		// get destination and check it
 		final DestinationObject dest = new DestinationObject(action, player);
