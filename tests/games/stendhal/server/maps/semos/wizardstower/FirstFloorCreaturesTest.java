@@ -1,7 +1,6 @@
 package games.stendhal.server.maps.semos.wizardstower;
 
-import static org.junit.Assert.assertFalse;
-
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -44,7 +43,6 @@ public class FirstFloorCreaturesTest {
 	public void testWhetherItemsCanBeDroppedInZone() { //makes sure you can't drop anything whilst in there
 		Player.equip("bag", candle);
 		RPAction drop = new RPAction(); //taken from DropAction.java
-		
 		//write code for dropping candle (taken from DropAction.java)
 		drop.put(EquipActionConsts.TYPE, "drop");
 		drop.put(EquipActionConsts.BASE_SLOT, candle.getContainerSlot().getName());
@@ -55,7 +53,7 @@ public class FirstFloorCreaturesTest {
 		
 		final DropAction action = new DropAction();
 		action.onAction(Player, drop);
-		assertFalse(tower.getItemsOnGround().contains(candle));
+		assertTrue(Player.isEquipped("candle", 1));
 	}
 	
 }
