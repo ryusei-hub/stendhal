@@ -69,16 +69,27 @@ public class LeaderNPC implements ZoneConfigurator {
 					        	final Item weapon = player.getWeapon();
 					        	if (weapon != null) {
 					        		String comment;
+					  
+					        		if(weapon.getAttack() == 100)
+					        		{
+					        			System.out.print(weapon.getName());
+					        			comment = "Wow! That is the strongest weapon I have ever seen. Press F to pay respect. F";
+					        			raiser.say(comment);
+					        			return;
+				
+					        		}
 					        		// this is, loosely, the formula used for damage of a weapon (not taking level into account here)
 					        		final float damage = (weapon.getAttack() + 1) / weapon.getAttackRate();
+					        		
 					        		if (weapon.getName().endsWith(" hand sword")) {
-					        			// this is a special case, we deal with explicitly
+					        			// this is a special case, we deal with explicitlyraiser.say(comment);
 					        			comment = "I see you use twin swords. They have a superb damage capability but as you cannot wear a shield with them, you will find it harder to defend yourself if attacked.";
-					        		} else if (damage >= 5) {
+					        		} else if (damage >= 5 && weapon.getName()!="rod of the gm") {
+			
 					        			comment = "That " + weapon.getName() + " is a powerful weapon, it has a good damage to rate ratio.";
-					        			if (weapon.getAttackRate() < 3) {
+					        			if (weapon.getAttackRate() < 3 && weapon.getName() != "rod of the gm") {
 					        				comment += " Despite the fast rate being useful, the low attack will not help you against strong creatures. Something heavier would be better then.";
-					        			} else if (weapon.getAttackRate() > 6) {
+					        			} else if (weapon.getAttackRate() > 6 && weapon.getName() != "rod of the gm") {
 					        				comment +=  " It should be useful against strong creatures. Remember though that something weaker but faster may suffice against lower level creatures.";
 					        			}
 					        		} else {
@@ -96,6 +107,8 @@ public class LeaderNPC implements ZoneConfigurator {
 					        				comment += " The negative lifesteal of " + lifesteal + " will drain your health as you use it.";
 					        			}
 					        		}
+					        		
+					        		
 					        		raiser.say(comment);
 					        	} else {
 					        		// player didn't have a weapon, as getWeapon returned null.

@@ -102,9 +102,9 @@ public class OutfitChangerAdder {
 						// find out what the player wants to wear
 
 						// We ignore any amounts.
-						res.setAmount(1);
+						//res.setAmount(1);
 
-						final int price = outfitBehaviour.getUnitPrice(res.getChosenItemName()) * res.getAmount();
+						final int price = outfitBehaviour.getUnitPrice(res.getChosenItemName()) * 1;
 
 						raiser.say("To " + action + " a " + res.getChosenItemName() + " will cost " + price
 								+ ". Do you want to " + action + " it?");

@@ -61,6 +61,39 @@ public class CoalForHaunchyTest extends ZonePlayerAndNPCTestImpl {
 
 		questSlot = quest.getSlotName();
 	}
+	
+	@Test
+	public void testQuestWithCharcoal() {
+		SpeakerNPC haunchy = SingletonRepository.getNPCList().get("Haunchy Meatoch");
+		Engine haunchyEng = haunchy.getEngine();
+
+		haunchyEng.step(player, "hi");
+		assertEquals("Hey! Nice day for a BBQ!", getReply(haunchy));
+		haunchyEng.step(player, "task");
+		assertEquals("I cannot use wood for this huge BBQ. To keep the heat I need some really old stone coal but there isn't much left. The problem is, that I can't fetch it myself because my steaks would burn then so I have to stay here. Can you bring me 25 pieces of #coal for my BBQ please?", getReply(haunchy));
+		haunchyEng.step(player, "coal");
+		assertEquals("Coal isn't easy to find. You normally can find it somewhere in the ground but perhaps you are lucky and find some in the old Semos Mine tunnels...", getReply(haunchy));
+		haunchyEng.step(player, "yes");
+		assertEquals("Thank you! If you have found 25 pieces, say #coal to me so I know you have it. I'll be sure to give you a nice and tasty reward.", getReply(haunchy));
+		haunchyEng.step(player, "coal");
+		assertEquals("You don't have the coal amount which I need yet. Go and pick some more pieces up, please.", getReply(haunchy));
+		haunchyEng.step(player, "bye");
+		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
+
+		// Get the required amount of charcoal
+		PlayerTestHelper.equipWithStackableItem(player, "charcoal", 25);
+		
+		haunchyEng.step(player, "hi");
+		assertEquals("Hey! Nice day for a BBQ!", getReply(haunchy));
+		haunchyEng.step(player, "task");
+		// We get one or more grilled steaks a reward:
+		// You see a fresh grilled steak. It smells awesome and is really juicy. It is a special quest reward for player, and cannot be used by others. Stats are (HP: 200).
+		assertTrue(getReply(haunchy).matches("Thank you!! Take .* grilled steaks? from my grill!"));
+		assertTrue(player.isEquipped("grilled steak"));
+		assertEquals("waiting", player.getQuest(questSlot, 0));
+		haunchyEng.step(player, "bye");
+		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
+	}
 
 	@Test
 	public void testQuest() {
