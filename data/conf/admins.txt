@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 akiamia
+=======
+>>>>>>> refs/heads/everything_for_coralia
