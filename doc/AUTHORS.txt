@@ -201,3 +201,20 @@ Notable contributors:
 - SnowFlake
   · Maps maker
   · NPCs
+  
+- Harvey Urwin (n54133hu)
+  · Issue #1 - Fish Soup for Hughie
+- Joe Loach (r21857jl)
+  · Issue #2 - Why does he ignore "horse hair"
+- Chi Kin Cheang (v14799cc)
+  · Issue #3 - Lieutenant Drilenun suggests that a better weapon exists.... BUT HE IS WRONG
+- Felix Waller (g75462fw)
+  · Issue #4 - Haunchy doesn't accept charcoal
+- Shaun Legg (y40034sl)
+  · Issue #5 - Sheep pet prevents travel between zones
+- Zhenxin Hu (u18382zh)
+  · Issue #6 - Coralia should have option to accept everything
+- Luke Durband (v78643ld)
+  · Issue #7 - Players can’t choose what masks they get from Fidorea
+- Ding-Gang Lin (h60953dl)
+  · Issue #8 - Cheating on Zekiel's Practical Test

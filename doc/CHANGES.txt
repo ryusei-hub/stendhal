@@ -2,6 +2,19 @@ Changelog
 ---------
 ---------
 
+1.41
+*world*
+- Lieutenant Drilenun knows the "rod of the GM" has the highest attack
+- Pets no longer prevent zone travel without warning
+- Players can choose a mask to purchase from Fidorea
+- quest changes:
+  - Ouchit doesn't ignore "horse hair" in Bows for Ouchit quest
+  - Haunchy accepts charcoal in Campfire quest
+  - Coralia can accept all fruit at once in Fruits for Coralia quest 
+  - Patch exploit on Zekiel's Practical Test
+
+*misc*
+- fix teleporting to Florence Bouillabaisse npc
 
 1.40
 
