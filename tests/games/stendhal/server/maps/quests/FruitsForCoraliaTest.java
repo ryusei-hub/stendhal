@@ -321,41 +321,43 @@ public class FruitsForCoraliaTest extends ZonePlayerAndNPCTestImpl {
 		// Accept everything
 		player.setQuest(questSlot, "done;0");
 
-		PlayerTestHelper.equipWithStackableItem(player, "apple", 4);
-		PlayerTestHelper.equipWithStackableItem(player, "cherry", 9);
-		PlayerTestHelper.equipWithStackableItem(player, "banana", 5);
-		PlayerTestHelper.equipWithStackableItem(player, "grapes", 2);
-		PlayerTestHelper.equipWithStackableItem(player, "pear", 4);
-		
-		
-
+		PlayerTestHelper.equipWithStackableItem(player, "apple", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "cherry", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "banana", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "grapes", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "pear", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "pomegranate", 10);
+		PlayerTestHelper.equipWithStackableItem(player, "watermelon", 10);
 		en.step(player, "hi");
 		assertEquals("Oh hello there, did I just catch you admiring my beautiful #hat?", getReply(npc));
 		en.step(player, "hat");
 		assertEquals("I'm sorry to say that the fruits you brought for my hat aren't very fresh anymore. Would you be kind enough to find me some more?", getReply(npc));
 		en.step(player, "yes");
-		assertEquals("That's wonderful! I'd like these fresh fruits: [items] or #everything.",getReply(npc));
-		en.step(player, "everything");
-		assertEquals("You didn't have all the ingredients I need. I still need 2 ingredients: #pomegranate and #watermelon.", getReply(npc));
+		assertEquals("That's wonderful! I'd like these fresh fruits: 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon or #everything.",getReply(npc));
 		en.step(player, "bye");
 		assertEquals("Bye.", getReply(npc));
-
-		PlayerTestHelper.equipWithStackableItem(player, "pomegranate", 2);
-		PlayerTestHelper.equipWithStackableItem(player, "watermelon", 1);
-
 		en.step(player, "hi");
 		assertEquals("Hello again. If you've brought me some fresh fruits for my #hat, I'll happily take them!", getReply(npc));
 		en.step(player, "hat");
-		assertEquals("I'd still like 2 #pomegranates, and a #watermelon or #everything. Have you brought any?", getReply(npc));
+		assertEquals("I'd still like 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon or #everything. Have you brought any?", getReply(npc));
+		en.step(player, "apple");
+		assertEquals("Wonderful! Did you bring anything else with you?", getReply(npc));
+		en.step(player, "bye");
+		assertEquals("Bye.", getReply(npc));
+		en.step(player, "hi");
+		assertEquals("Hello again. If you've brought me some fresh fruits for my #hat, I'll happily take them!", getReply(npc));
+		en.step(player, "hat");
+		assertEquals("I'd still like 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon or #everything. Have you brought any?", getReply(npc));		
 		en.step(player, "everything");
 		assertEquals("My hat has never looked so delightful! Thank you ever so much! Here, take this as a reward.", getReply(npc));
+
 		assertTrue(player.isEquipped("crepes suzette"));
 		assertTrue(player.isEquipped("minor potion"));
 		assertThat(player.getXP(), greaterThan(xp));
 		assertThat(player.getKarma(), greaterThan(karma));
 		en.step(player, "bye");
 		assertEquals("Bye.", getReply(npc));
-
+		
 		//player.setQuest(questSlot, 1, "0");This doesn't seem to work either.
 		//TODO: correct test (or fix bug in quest ^^)
 		/*
