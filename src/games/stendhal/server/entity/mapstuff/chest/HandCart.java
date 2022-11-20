@@ -1,7 +1,27 @@
 package games.stendhal.server.entity.mapstuff.chest;
 
-public class HandCart {
+import games.stendhal.common.Direction;
+import games.stendhal.server.entity.ActiveEntity;
+import games.stendhal.server.entity.player.Player;
 
+public class HandCart extends ActiveEntity {
+	
+	public HandCart(boolean multiPush) {
+
+	}
+	
+	public int getX() {
+		return 1;
+	}
+	
+	public int getY() {
+		return 1;
+	}
+	
+	public void push(Player p, Direction d) {
+		
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
