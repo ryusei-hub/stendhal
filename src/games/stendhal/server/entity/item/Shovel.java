@@ -12,6 +12,7 @@
 package games.stendhal.server.entity.item;
 
 import java.util.Map;
+import games.stendhal.server.maps.quests.houses.HouseUtilities;
 
 import org.apache.log4j.Logger;
 
@@ -80,6 +81,11 @@ public class Shovel extends AreaUseItem {
 						}
 					}
 				}
+			}
+			else{
+				//NOT Quest
+				// check it is garden ground
+				
 			}
 		}
 
