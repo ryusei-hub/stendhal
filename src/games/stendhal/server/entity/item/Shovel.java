@@ -90,7 +90,16 @@ public class Shovel extends AreaUseItem {
 	}
 
 	public boolean removeSoil(final StendhalRPZone zone, final int x, final int y) {
-		return false;
+		if (isFertileSoilAt(zone, x, y)) {
+			return false;
+		}
+		for (Entity entity : zone.getEntitiesAt(x, y)) {
+			if (entity instanceof FertileGround) {
+				zone.remove(entity);
+				break;
+			} 
+		}
+		return true;
 	}
 
 	public boolean addSoil(final StendhalRPZone zone, final int x, final int y) {
