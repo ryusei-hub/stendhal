@@ -2,7 +2,6 @@ package games.stendhal.server.entity.item;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,6 +32,14 @@ public class ShovelTest {
 
     @Test
     public void ShovelFertileTest() {
-        fail();
+        final StendhalRPZone zone = new StendhalRPZone("zone");
+        Shovel s = new Shovel("shovel", "tool", "shovel", null);
+
+        //Add initial patch of soil
+        assertTrue(s.addSoil(zone, 0, 0));
+
+        //Add soil to same patch, should return false since there is 
+        //already soil there
+        assertFalse(s.addSoil(zone, 0, 0));
     }
 }
