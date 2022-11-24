@@ -86,6 +86,14 @@ public class Shovel extends AreaUseItem {
 		return true;
 	}
 
+	public boolean removeSoil(final StendhalRPZone zone, final int x, final int y) {
+		return false;
+	}
+
+	public boolean addSoil(final StendhalRPZone zone, final int x, final int y) {
+		return false;
+	}
+
 	/**
 	 * Checks if a position is within 10 steps of where ring is buried.
 	 *
