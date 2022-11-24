@@ -97,14 +97,10 @@ public class Shovel extends AreaUseItem {
 	}
 
 	private boolean isFertileSoilAt(final StendhalRPZone zone, final int x, final int y) {
-		if (this.getZone() == null) {
-			return false;
-		} else {
-			for (Entity entity : zone.getEntitiesAt(x, y)) {
-				if (entity instanceof FertileGround) {
-					return true;
-				} 
-			}
+		for (Entity entity : zone.getEntitiesAt(x, y)) {
+			if (entity instanceof FertileGround) {
+				return true;
+			} 
 		}
 		return false;
 	}
