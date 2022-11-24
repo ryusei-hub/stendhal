@@ -3,6 +3,8 @@ package games.stendhal.server.entity.item;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,7 +20,7 @@ public class ShovelTest {
     @Test
     public void ShovelRemoveTest() {
         final StendhalRPZone zone = new StendhalRPZone("zone");
-        Shovel s = new Shovel("shovel", "tool", "shovel", null);
+        Shovel s = new Shovel("shovel", "tool", "shovel", new HashMap<String, String>());
         // add soil to the world at 0,0
         s.addSoil(zone, 0, 0);
         // Soil should be able to be removed when there's soil already there.
@@ -33,7 +35,7 @@ public class ShovelTest {
     @Test
     public void ShovelFertileTest() {
         final StendhalRPZone zone = new StendhalRPZone("zone");
-        Shovel s = new Shovel("shovel", "tool", "shovel", null);
+        Shovel s = new Shovel("shovel", "tool", "shovel", new HashMap<String, String>());
 
         //Add initial patch of soil
         assertTrue(s.addSoil(zone, 0, 0));
