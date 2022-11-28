@@ -50,7 +50,7 @@ public class PipeExist {
 		/**weapon.put("atk", 0);
 		weapon.put("rate", 100);**/
 		player.equipToInventoryOnly(weapon);
-		assertTrue(player.isEquipped("orcarina"));
+		assertTrue(player.isEquipped("wind pipe"));
 
 		player.drop(weapon);
 
@@ -61,7 +61,7 @@ public class PipeExist {
 	public void TestPipeProperty() {
 		final Item weapon = new Item("wind pipe", "club", "subclass", null);
 		assertEquals(0,weapon.getAttack());
-		assertEquals(100,weapon.getAttackRate());
+		assertEquals(5,weapon.getAttackRate());
 		
 		}
 	}
