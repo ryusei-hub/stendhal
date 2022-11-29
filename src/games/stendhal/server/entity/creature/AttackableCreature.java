@@ -41,11 +41,17 @@ public class AttackableCreature extends Creature {
 	public List<RPEntity> getEnemyList() {
 		List<RPEntity> res = this.getAttackingRPEntities();
 
+
+
+
 		Player masterPlayer = SingletonRepository.getRuleProcessor().getPlayer(master);
 
 		if (masterPlayer != null) {
 			res.addAll(masterPlayer.getAttackingRPEntities());
 		}
+
+
+
 		return res;
 	}
 
