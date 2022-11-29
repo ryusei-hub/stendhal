@@ -3,23 +3,20 @@ package games.stendhal.server.entity.mapstuff.chest;
 import java.util.Iterator;
 
 import games.stendhal.common.Direction;
-import games.stendhal.common.grammar.Grammar;
+import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.events.UseListener;
 import games.stendhal.server.entity.ActiveEntity;
 import games.stendhal.server.entity.PassiveEntity;
 import games.stendhal.server.entity.RPEntity;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.entity.slot.HandCartSlot;
-import marauroa.common.game.RPClass;
 import marauroa.common.game.RPObject;
-import marauroa.common.game.RPSlot;
-import marauroa.common.game.Definition.Type;
 
 public class HandCart extends ActiveEntity implements UseListener{
 	
+	public Chest chest;
 	
 	public HandCart(boolean multiPush) {
-		
+		chest = new Chest();
 	}
 	
 	public int getX() {
@@ -34,24 +31,11 @@ public class HandCart extends ActiveEntity implements UseListener{
 		
 	}
 	
-	
-	private static final String CART_RPCLASS_NAME = "chest";
-
-	/**
-	 * Whether the cart is open.
-	 */
-	private boolean open;
-
 	/**
 	 * Creates a new cart.
 	 */
 	public HandCart() {
-		setRPClass(CART_RPCLASS_NAME);
-		put("type", CART_RPCLASS_NAME);
-		open = false;
-
-		final RPSlot slot = new HandCartSlot(this);
-		addSlot(slot);
+		chest = new Chest();
 	}
 
 	/**
@@ -61,63 +45,31 @@ public class HandCart extends ActiveEntity implements UseListener{
 	 *            RPObject
 	 */
 	public HandCart(final RPObject object) {
-		super(object);
-		setRPClass(CART_RPCLASS_NAME);
-		put("type", CART_RPCLASS_NAME);
-
-		if (!hasSlot("content")) {
-			final RPSlot slot = new HandCartSlot(this);
-			addSlot(slot);
-		}
-
-		update();
-	}
-
-	public static void generateRPClass() {
-		if (!RPClass.hasRPClass(CART_RPCLASS_NAME)) {
-			final RPClass cart = new RPClass(CART_RPCLASS_NAME);
-			cart.isA("entity");
-			cart.addAttribute("open", Type.FLAG);
-			cart.addRPSlot("content", 30);
-		}
+		chest = new Chest(object);
 	}
 
 
 	//
-	// Chest
+	// Cart
 	//
-
-	@Override
-    public String getDescriptionName(final boolean definite) {
-	    return Grammar.article_noun(CART_RPCLASS_NAME, definite);
-    }
 
 	@Override
 	public void update() {
-		super.update();
-		open = false;
-		if (has("open")) {
-			open = true;
-		}
+		chest.update();
 	}
 
 	/**
 	 * Open the cart.
 	 */
 	public void open() {
-		this.open = true;
-		put("open", "");
+		chest.open();
 	}
 
 	/**
 	 * Close the cart.
 	 */
 	public void close() {
-		this.open = false;
-
-		if (has("open")) {
-			remove("open");
-		}
+		chest.close();
 	}
 
 	/**
@@ -126,7 +78,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	 * @return <code>true</code> if the chest is open.
 	 */
 	public boolean isOpen() {
-		return open;
+		return chest.isOpen();
 	}
 
 	/**
@@ -136,13 +88,12 @@ public class HandCart extends ActiveEntity implements UseListener{
 	 *            entity to add
 	 */
 	public void add(final PassiveEntity entity) {
-		final RPSlot content = getSlot("content");
-		content.add(entity);
+		chest.add(entity);
 	}
 
 	@Override
 	public int size() {
-		return getSlot("content").size();
+		return chest.size();
 	}
 
 	/**
@@ -151,8 +102,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	 * @return iterator for the content
 	 */
 	public Iterator<RPObject> getContent() {
-		final RPSlot content = getSlot("content");
-		return content.iterator();
+		return chest.getContent();
 	}
 
 	//
@@ -161,21 +111,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 
 	@Override
 	public boolean onUsed(final RPEntity user) {
-		if (user.nextTo(this)) {
-			if (isOpen()) {
-				close();
-			} else {
-				open();
-			}
-
-			notifyWorldAboutChanges();
-			return true;
-		}
-		if (user instanceof Player) {
-			final Player player = (Player) user;
-			player.sendPrivateText("You cannot reach the cart from there.");
-		}
-		return false;
+		return chest.onUsed(user);
 	}
 
 	//
@@ -184,21 +120,25 @@ public class HandCart extends ActiveEntity implements UseListener{
 
 	@Override
 	public String describe() {
-		String text = "You see a hand cart.";
-
-		if (hasDescription()) {
-			text = getDescription();
-		}
-
-		if (isOpen()) {
-			text += " It is open.";
-			text += " You can right click and inspect this item to see its contents.";
-		} else {
-			text += " It is closed.";
-		}
-		text += " You can push this item.";
-
-		return (text);
+		return chest.describe();
 	}
+	
+	@Override
+	public void onAdded(final StendhalRPZone zone) {
+		zone.add(chest);
+		super.onAdded(zone);
+	}
+	
+	@Override 
+	protected void onMoved(final int oldX, final int oldY, final int newX, final int newY) {
+		chest.setPosition(newX, newY);
+	}
+	
+	//setPosition is final, so we have this instead
+	public void setPos(int x, int y) {
+		super.setPosition(x,  y);
+		chest.setPosition(x,  y);
+	}
+	
 
 }
