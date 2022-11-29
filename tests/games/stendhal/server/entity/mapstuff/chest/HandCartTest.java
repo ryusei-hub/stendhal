@@ -46,7 +46,7 @@ public class HandCartTest {
 	 */
 	@Test
 	public final void testOpen() {
-		final HandCart hc = new HandCart(false);
+		final HandCart hc = new HandCart();
 		assertFalse(hc.isOpen());
 		hc.open();
 
@@ -60,7 +60,7 @@ public class HandCartTest {
 	 */
 	@Test
 	public final void testOnUsed() {
-		final HandCart hc = new HandCart(false);
+		final HandCart hc = new HandCart();
 		assertFalse(hc.isOpen());
 		hc.onUsed(new RPEntity() {
 

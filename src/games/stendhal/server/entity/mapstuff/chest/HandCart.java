@@ -35,19 +35,19 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 	
 	
-	private static final String CHEST_RPCLASS_NAME = "chest";
+	private static final String CART_RPCLASS_NAME = "chest";
 
 	/**
-	 * Whether the chest is open.
+	 * Whether the cart is open.
 	 */
 	private boolean open;
 
 	/**
-	 * Creates a new chest.
+	 * Creates a new cart.
 	 */
 	public HandCart() {
-		setRPClass(CHEST_RPCLASS_NAME);
-		put("type", CHEST_RPCLASS_NAME);
+		setRPClass(CART_RPCLASS_NAME);
+		put("type", CART_RPCLASS_NAME);
 		open = false;
 
 		final RPSlot slot = new HandCartSlot(this);
@@ -55,15 +55,15 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	/**
-	 * Creates a new chest.
+	 * Creates a new cart.
 	 *
 	 * @param object
 	 *            RPObject
 	 */
 	public HandCart(final RPObject object) {
 		super(object);
-		setRPClass(CHEST_RPCLASS_NAME);
-		put("type", CHEST_RPCLASS_NAME);
+		setRPClass(CART_RPCLASS_NAME);
+		put("type", CART_RPCLASS_NAME);
 
 		if (!hasSlot("content")) {
 			final RPSlot slot = new HandCartSlot(this);
@@ -74,11 +74,11 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	public static void generateRPClass() {
-		if (!RPClass.hasRPClass(CHEST_RPCLASS_NAME)) {
-			final RPClass chest = new RPClass(CHEST_RPCLASS_NAME);
-			chest.isA("entity");
-			chest.addAttribute("open", Type.FLAG);
-			chest.addRPSlot("content", 30);
+		if (!RPClass.hasRPClass(CART_RPCLASS_NAME)) {
+			final RPClass cart = new RPClass(CART_RPCLASS_NAME);
+			cart.isA("entity");
+			cart.addAttribute("open", Type.FLAG);
+			cart.addRPSlot("content", 30);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 
 	@Override
     public String getDescriptionName(final boolean definite) {
-	    return Grammar.article_noun(CHEST_RPCLASS_NAME, definite);
+	    return Grammar.article_noun(CART_RPCLASS_NAME, definite);
     }
 
 	@Override
@@ -102,7 +102,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	/**
-	 * Open the chest.
+	 * Open the cart.
 	 */
 	public void open() {
 		this.open = true;
@@ -110,7 +110,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	/**
-	 * Close the chest.
+	 * Close the cart.
 	 */
 	public void close() {
 		this.open = false;
@@ -121,7 +121,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	/**
-	 * Determine if the chest is open.
+	 * Determine if the cart is open.
 	 *
 	 * @return <code>true</code> if the chest is open.
 	 */
@@ -130,7 +130,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	}
 
 	/**
-	 * Adds a passive entity (like an item) to the chest.
+	 * Adds a passive entity (like an item) to the cart.
 	 *
 	 * @param entity
 	 *            entity to add
@@ -173,7 +173,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 		}
 		if (user instanceof Player) {
 			final Player player = (Player) user;
-			player.sendPrivateText("You cannot reach the chest from there.");
+			player.sendPrivateText("You cannot reach the cart from there.");
 		}
 		return false;
 	}
@@ -184,7 +184,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 
 	@Override
 	public String describe() {
-		String text = "You see a chest.";
+		String text = "You see a hand cart.";
 
 		if (hasDescription()) {
 			text = getDescription();
@@ -196,6 +196,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 		} else {
 			text += " It is closed.";
 		}
+		text += " You can push this item.";
 
 		return (text);
 	}
