@@ -50,7 +50,10 @@ public class AttackableCreature extends Creature {
 			res.addAll(masterPlayer.getAttackingRPEntities());
 		}
 
-
+		// if player is equipped the wind pipe, the monster will not attack the player.
+		if (masterPlayer.isEquipped("wind pipe")){
+			res.clear();
+		}
 
 		return res;
 	}
