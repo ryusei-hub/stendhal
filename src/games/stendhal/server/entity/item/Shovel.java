@@ -83,15 +83,15 @@ public class Shovel extends AreaUseItem {
 						}
 					}
 				}
-			}
-		} else {
-			final String zoneName = zone.getName();
-
-			if (zoneName.contains("kalavan") || zoneName.contains("ados") || zoneName.contains("kirdneh")) {
-				if (isFertileSoilAt(zone, x, y)) {
-					removeSoil(zone, x, y);
-				} else {
-					addSoil(zone, x, y);
+			} else {
+				final String zoneName = zone.getName();
+	
+				if (zoneName.contains("kalavan") || zoneName.contains("ados") || zoneName.contains("kirdneh")) {
+					if (isFertileSoilAt(zone, x, y)) {
+						removeSoil(zone, x, y);
+					} else {
+						addSoil(zone, x, y);
+					}
 				}
 			}
 		}
