@@ -11,9 +11,9 @@ import org.junit.Test;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
-import utilities.ZonePlayerAndNPCTestImpl;
+import utilities.PlayerTestHelper;
 
-public class ShovelTest extends ZonePlayerAndNPCTestImpl {
+public class ShovelTest {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         MockStendlRPWorld.get();
@@ -51,7 +51,7 @@ public class ShovelTest extends ZonePlayerAndNPCTestImpl {
     public void ShovelUsedByPlayerTest() {
         final StendhalRPZone zone = new StendhalRPZone("ados");
 
-        Player player = createPlayer("bob");
+        final Player player = PlayerTestHelper.createPlayer("bob");
         zone.add(player);
 
         Shovel s = new Shovel("shovel", "tool", "shovel", new HashMap<String, String>());
