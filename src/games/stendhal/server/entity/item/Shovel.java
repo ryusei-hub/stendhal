@@ -85,7 +85,7 @@ public class Shovel extends AreaUseItem {
 				}
 			}
 		} else {
-			final var zoneName = zone.getName();
+			final String zoneName = zone.getName();
 
 			if (zoneName.contains("kalavan") || zoneName.contains("ados") || zoneName.contains("kirdneh")) {
 				if (isFertileSoilAt(zone, x, y)) {
