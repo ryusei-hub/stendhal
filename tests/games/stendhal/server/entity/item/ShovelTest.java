@@ -9,9 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import games.stendhal.server.core.engine.StendhalRPZone;
+import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.MockStendlRPWorld;
+import utilities.ZonePlayerAndNPCTestImpl;
 
-public class ShovelTest {
+public class ShovelTest extends ZonePlayerAndNPCTestImpl {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         MockStendlRPWorld.get();
@@ -43,5 +45,29 @@ public class ShovelTest {
         //Add soil to same patch, should return false since there is 
         //already soil there
         assertFalse(s.addSoil(zone, 0, 0));
+    }
+
+    @Test
+    public void ShovelUsedByPlayerTest() {
+        final StendhalRPZone zone = new StendhalRPZone("ados");
+
+        Player player = createPlayer("bob");
+        zone.add(player);
+
+        Shovel s = new Shovel("shovel", "tool", "shovel", new HashMap<String, String>());
+
+        //Add soil using shovel
+        s.onUsedInArea(player, zone, 0, 0); 
+        //Remove soil 
+        assertTrue(s.removeSoil(zone, 0, 0));
+        //Check to make sure you cant remove soil again 
+        assertFalse(s.removeSoil(zone, 0, 0));
+
+        //Add soil
+        s.addSoil(zone, 0, 0);
+        //Remove soil using shovel
+        s.onUsedInArea(player, zone, 0, 0);
+        //Check you cant remove soil again
+        assertFalse(s.removeSoil(zone, 0, 0));
     }
 }
