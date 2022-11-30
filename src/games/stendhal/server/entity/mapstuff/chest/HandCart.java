@@ -1,40 +1,46 @@
 package games.stendhal.server.entity.mapstuff.chest;
 
+//import java.util.Arrays;
 import java.util.Iterator;
-
-import games.stendhal.common.Direction;
+//import java.util.List;
+//
+//import games.stendhal.common.Direction;
+//import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
+//import games.stendhal.server.core.events.MovementListener;
+//import games.stendhal.server.core.events.TurnListener;
 import games.stendhal.server.core.events.UseListener;
-import games.stendhal.server.entity.ActiveEntity;
+//import games.stendhal.server.core.events.ZoneEnterExitListener;
+//import games.stendhal.server.entity.ActiveEntity;
 import games.stendhal.server.entity.PassiveEntity;
 import games.stendhal.server.entity.RPEntity;
-import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.entity.mapstuff.block.Block;
+//import games.stendhal.server.entity.mapstuff.block.BlockTarget;
+//import games.stendhal.server.entity.player.Player;
 import marauroa.common.game.RPObject;
 
-public class HandCart extends ActiveEntity implements UseListener{
+public class HandCart extends Block implements UseListener{
 	
 	public Chest chest;
+//	
+//	public int getX() {
+//		return 1;
+//	}
+//	
+//	public int getY() {
+//		return 1;
+//	}
+//	
+	//public void push(Player p, Direction d) {
 	
-	public HandCart(boolean multiPush) {
-		chest = new Chest();
-	}
-	
-	public int getX() {
-		return 1;
-	}
-	
-	public int getY() {
-		return 1;
-	}
-	
-	public void push(Player p, Direction d) {
-		
-	}
+	//}
+//	
 	
 	/**
 	 * Creates a new cart.
 	 */
 	public HandCart() {
+		super(true);
 		chest = new Chest();
 	}
 
@@ -45,6 +51,7 @@ public class HandCart extends ActiveEntity implements UseListener{
 	 *            RPObject
 	 */
 	public HandCart(final RPObject object) {
+		super(true);
 		chest = new Chest(object);
 	}
 

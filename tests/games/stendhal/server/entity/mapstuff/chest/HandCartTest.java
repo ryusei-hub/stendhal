@@ -16,7 +16,7 @@ public class HandCartTest {
 	
 	@Test
 	public void testPush() {
-		HandCart hc = new HandCart(true);
+		HandCart hc = new HandCart();
 		hc.setPosition(0, 0);
 		StendhalRPZone z = new StendhalRPZone("test", 10, 10);
 		Player p = PlayerTestHelper.createPlayer("pusher");
