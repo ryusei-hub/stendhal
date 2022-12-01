@@ -20,6 +20,7 @@ import games.stendhal.server.core.config.ZoneConfigurator;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.pathfinder.FixedPath;
 import games.stendhal.server.core.pathfinder.Node;
+import games.stendhal.server.entity.mapstuff.chest.HandCart;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 
 /**
@@ -41,6 +42,9 @@ public class WomanGhostNPC implements ZoneConfigurator {
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		buildNPC(zone);
+		HandCart cart = new HandCart();
+        cart.setPos(5, 5);
+        zone.add(cart);
 	}
 	private void buildNPC(final StendhalRPZone zone) {
 		final SpeakerNPC woman = new SpeakerNPC("Carena") {
