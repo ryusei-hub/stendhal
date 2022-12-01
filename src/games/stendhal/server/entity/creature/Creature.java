@@ -471,7 +471,6 @@ public class Creature extends NPC {
 	}
 
 	public boolean isAttackTurn(final int turn) {
-		
 		return ((turn + attackTurn) % getAttackRate() == 0);
 	}
 

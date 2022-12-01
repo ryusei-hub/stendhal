@@ -1251,7 +1251,7 @@ public abstract class RPEntity extends CombatEntity {
 		if (attackTarget != null) {
 			attackTarget.attackSources.remove(this);
 		}
-		if(attackTarget.isEquipped("wind pipe")) {
+		if(target.isEquipped("wind pipe")) {
 			attackTarget.attackSources.remove(this);
 		}
 		attackTarget = target;

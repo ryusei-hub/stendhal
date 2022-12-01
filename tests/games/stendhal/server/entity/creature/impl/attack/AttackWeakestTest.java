@@ -95,31 +95,31 @@ public class AttackWeakestTest {
 		assertFalse("has a valid target", strat.hasValidTarget(creature));
 	}
 
-	// Tests when player is equipped the wind pipe, the enemy doesn't attack player.
-
-	@Test
-	public void testequippedpipe(){
-		AttackStrategy strat = new AttackWeakest();
-				/*
-		 *  Need to use a real creature, because the
-		 *  creature needs to be offensive to see the
-		 *  targets.
-		 */
-		final Creature creature = SingletonRepository.getEntityManager().getCreature("rat");
-		Player player = PlayerTestHelper.createPlayer("Gavin");
-
-		StendhalRPZone arena = new StendhalRPZone("arena");
-		arena.add(creature);
-		assertFalse("is not attacking", strat.hasValidTarget(creature));
-		arena.add(player);
-
-		creature.setPosition(3, 3);
-		player.setPosition(3, 4);
-		
-		creature.setTarget(player);
-		player.isEquipped("wind pipe");
-		assertTrue("is not attacking", strat.hasValidTarget(creature));
-	}
+//	// Tests when player is equipped the wind pipe, the enemy doesn't attack player.
+//
+//	@Test
+//	public void testequippedpipe(){
+//		AttackStrategy strat = new AttackWeakest();
+//				/*
+//		 *  Need to use a real creature, because the
+//		 *  creature needs to be offensive to see the
+//		 *  targets.
+//		 */
+//		final Creature creature = SingletonRepository.getEntityManager().getCreature("rat");
+//		Player player = PlayerTestHelper.createPlayer("Gavin");
+//
+//		StendhalRPZone arena = new StendhalRPZone("arena");
+//		arena.add(creature);
+//		assertFalse("is not attacking", strat.hasValidTarget(creature));
+//		arena.add(player);
+//
+//		creature.setPosition(3, 3);
+//		player.setPosition(3, 4);
+//		
+//		creature.setTarget(player);
+//		player.isEquipped("wind pipe");
+//		assertTrue("is not attacking", strat.hasValidTarget(creature));
+//	}
 
 	/**
 	 * Tests finding a new target
