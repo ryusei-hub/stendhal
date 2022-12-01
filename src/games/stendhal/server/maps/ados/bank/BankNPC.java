@@ -18,6 +18,7 @@ import games.stendhal.common.Direction;
 import games.stendhal.server.core.config.ZoneConfigurator;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.RPEntity;
+import games.stendhal.server.entity.mapstuff.chest.HandCart;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 
 /**
@@ -39,6 +40,9 @@ public class BankNPC implements ZoneConfigurator {
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		buildNPC(zone);
+		HandCart cart = new HandCart();
+		cart.setPos(18, 15);
+		zone.add(cart);
 	}
 
 	private void buildNPC(final StendhalRPZone zone) {
