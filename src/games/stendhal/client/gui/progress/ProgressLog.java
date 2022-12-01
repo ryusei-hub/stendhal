@@ -120,6 +120,7 @@ class ProgressLog {
 	void setPages(List<String> pages, ProgressStatusQuery query) {
 		tabs.removeAll();
 		this.pages.clear();
+		pages.add("Bank Chests");
 		for (String page : pages) {
 			Page content = new Page();
 			content.setFontName(fontName);
@@ -405,7 +406,7 @@ class ProgressLog {
 		 * 	repeatable, otherwise <code>false</code>
 		 */
 		void setContent(String header, String description, String information,
-				List<String> contents, boolean repeatable) {
+			List<String> contents, boolean repeatable) {
 			StringBuilder text = new StringBuilder("<html>");
 			text.append(createStyleDefinition());
 
