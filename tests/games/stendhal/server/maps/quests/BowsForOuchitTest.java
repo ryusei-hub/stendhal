@@ -14,6 +14,7 @@ package games.stendhal.server.maps.quests;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
@@ -150,9 +151,9 @@ public class BowsForOuchitTest {
 		en.step(player, "task");
 		assertEquals("I don't have time for those things, sorry. Working.. working.. working..", getReply(npc));
 
-		// he does reply to horse hairs
-//		en.step(player, "horse hairs");
-//		assertNull(getReply(npc));
+		// he doesn't seem to reply to horse hairs
+		en.step(player, "horse hairs");
+		assertNull(getReply(npc));
 
 		en.step(player, "ouchit");
 		assertEquals("Hello, hello! Ouchit needs more horse hairs from my horses? No problem, here you are. Send Ouchit greetings from me.", getReply(npc));
