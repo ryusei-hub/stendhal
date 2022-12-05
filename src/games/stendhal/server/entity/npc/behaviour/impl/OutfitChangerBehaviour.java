@@ -167,11 +167,14 @@ public class OutfitChangerBehaviour extends MerchantBehaviour {
 			return false;
 		}
 
+		int index = res.getAmount() - 1;
+		res.setAmount(1);
+		
 		int charge = getCharge(res, player);
 
 		if (player.isEquipped("money", charge)) {
 			player.drop("money", charge);
-			putOnOutfit(player, outfitType);
+			putOnOutfit(player, outfitType, index);
 			return true;
 		} else {
 			seller.say("Sorry, you don't have enough money!");
@@ -230,14 +233,20 @@ public class OutfitChangerBehaviour extends MerchantBehaviour {
 	 *            The player.
 	 * @param outfitType the outfit to wear
 	 */
-	public void putOnOutfit(final Player player, final String outfitType) {
+	public void putOnOutfit(final Player player, final String outfitType, int index) {
 		if (resetBeforeChange) {
 			// cannot use OutfitChangerBehaviour.returnToOriginalOutfit(player) as it checks if the outfit was rented from here
 			player.returnToOriginalOutfit();
 		}
 
 		final List<Outfit> possibleNewOutfits = outfitTypes.get(outfitType);
-		final Outfit newOutfit = Rand.rand(possibleNewOutfits);
+		final Outfit newOutfit;
+		if (index < possibleNewOutfits.size() && index >= 0) {
+			 newOutfit = possibleNewOutfits.get(index);
+		}
+		else {
+			newOutfit = Rand.rand(possibleNewOutfits);
+		}
 		player.setOutfit(newOutfit.putOver(player.getOutfit()), true);
 		player.registerOutfitExpireTime(endurance);
 	}

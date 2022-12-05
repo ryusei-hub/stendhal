@@ -46,6 +46,7 @@ import games.stendhal.common.constants.SoundLayer;
 import games.stendhal.common.constants.Testing;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.WordList;
+import games.stendhal.server.actions.chat.TellAction;
 import games.stendhal.server.core.engine.GameEvent;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
@@ -71,6 +72,7 @@ import games.stendhal.server.entity.slot.Slots;
 import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.events.PrivateTextEvent;
 import games.stendhal.server.events.SoundEvent;
+import marauroa.common.game.RPAction;
 import marauroa.common.game.RPEvent;
 import marauroa.common.game.RPObject;
 import marauroa.common.game.RPSlot;
@@ -1681,6 +1683,11 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (sheep != null) {
 			if (squaredDistance(sheep) > 7 * 7) {
+				final RPAction action = new RPAction();
+				final TellAction tell = new TellAction();
+				action.put("target", getName());
+				action.put("text", "My pet is too far away");
+				tell.onAction(this, action);
 				return false;
 			}
 		}
@@ -1689,6 +1696,11 @@ public class Player extends DressedEntity implements UseListener {
 
 		if (pet != null) {
 			if (squaredDistance(pet) > 7 * 7) {
+				final RPAction action = new RPAction();
+				final TellAction tell = new TellAction();
+				action.put("target", getName());
+				action.put("text", "My pet is too far away");
+				tell.onAction(this, action);
 				return false;
 			}
 		}
