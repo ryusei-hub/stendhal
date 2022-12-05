@@ -1,6 +1,12 @@
 Changelog
 ---------
 ---------
+1.42
+*world*
+- Hand Carts have been added as pushable chests
+- Players can access bank statements to view the contents of their bank chests
+- Added a pipe of charming that when equipped makes enemies not target the player
+- Added the ability for players to grow plants around their home
 
 1.41
 *world*
