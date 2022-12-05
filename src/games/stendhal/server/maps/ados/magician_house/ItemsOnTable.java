@@ -18,6 +18,7 @@ import games.stendhal.server.core.config.ZoneConfigurator;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.item.Item;
+import games.stendhal.server.entity.mapstuff.chest.HandCart;
 import games.stendhal.server.entity.mapstuff.spawner.PassiveEntityRespawnPoint;
 
 /**
@@ -29,6 +30,9 @@ public class ItemsOnTable implements ZoneConfigurator {
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		buildMagicianHouseArea(zone);
+		 HandCart cart = new HandCart();
+	     cart.setPos(5, 2);
+	     zone.add(cart);
 	}
 
 	private void buildMagicianHouseArea(final StendhalRPZone zone) {

@@ -20,6 +20,7 @@ import games.stendhal.server.core.config.ZoneConfigurator;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.pathfinder.FixedPath;
 import games.stendhal.server.core.pathfinder.Node;
+import games.stendhal.server.entity.mapstuff.chest.HandCart;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 
@@ -37,6 +38,9 @@ public class DeathmatchRecruiterNPC implements ZoneConfigurator {
 	@Override
 	public void configureZone(final StendhalRPZone zone, final Map<String, String> attributes) {
 		buildDeathmatchRecruiter(zone);
+		HandCart cart = new HandCart();
+		cart.setPos(22, 23);
+		zone.add(cart);
 	}
 
 	private void buildDeathmatchRecruiter(final StendhalRPZone zone) {
