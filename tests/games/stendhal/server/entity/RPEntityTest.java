@@ -419,7 +419,29 @@ public class RPEntityTest {
 		assertFalse(attacker.isAttacking());
 
 	}
-
+//	Test for the wind pipe is working or not.
+	@Test
+	public void testpipe() {
+		final StendhalRPZone zone = new StendhalRPZone("testzone");
+		final RPEntity attacker = new MockRPEntity();
+		attacker.updateModifiedAttributes();
+		assertFalse("attacktarget = null", attacker.isAttacking());
+		final RPEntity defender = new MockRPEntity();
+		defender.updateModifiedAttributes();
+		zone.add(attacker);
+		zone.add(defender);
+		defender.isEquipped("wind pipe");
+		attacker.setTarget(defender);
+		defender.setBaseHP(1);
+		defender.setHP(1);
+		assertTrue(attacker.isAttacking());
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * Tests for setXP.
 	 */

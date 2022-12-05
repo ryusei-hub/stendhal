@@ -143,5 +143,7 @@
       <slot name="trade"/>
     </equipable>
   </item>
+  
+  
 
 </items>

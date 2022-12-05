@@ -41,11 +41,20 @@ public class AttackableCreature extends Creature {
 	public List<RPEntity> getEnemyList() {
 		List<RPEntity> res = this.getAttackingRPEntities();
 
+
+
+
 		Player masterPlayer = SingletonRepository.getRuleProcessor().getPlayer(master);
 
 		if (masterPlayer != null) {
 			res.addAll(masterPlayer.getAttackingRPEntities());
 		}
+
+//		// if player is equipped the wind pipe, the monster will not attack the player.
+//		if (masterPlayer.isEquipped("wind pipe")){
+//			res.clear();
+//		}
+
 		return res;
 	}
 

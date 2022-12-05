@@ -1293,6 +1293,7 @@ d = 9017093486007323270605414717455737376618092805104733236083857811315606869372
 				<exclude name="rings.xml"/>
 				<exclude name="shields.xml"/>
 				<exclude name="swords.xml"/>
+				
 			</fileset>
 		</schemavalidate>
 		<schemavalidate>
@@ -1312,6 +1313,7 @@ d = 9017093486007323270605414717455737376618092805104733236083857811315606869372
 				<include name="rings.xml"/>
 				<include name="shields.xml"/>
 				<include name="swords.xml"/>
+				
 			</fileset>
 		</schemavalidate>
 		<schemavalidate>
