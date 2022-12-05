@@ -12,6 +12,7 @@
 package games.stendhal.client.gui.progress;
 
 import java.awt.Window;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class ProgressLogController {
 			}
 		});
 	}
+
 	/**
 	 * Show available progress categories.
 	 *
@@ -98,7 +100,13 @@ public class ProgressLogController {
 				RequestAction contentAction = new RequestAction();
 				contentAction.setDataKey("item");
 				contentAction.setProgressType(category);
-
+				for (String item : items) {
+					if (item.equals("Ados Bank")) {
+						items.remove(item);
+						List<String> temp = Arrays.asList(new String[] { item });
+						getProgressLog().setPageIndex("Bank Chests", temp, contentAction);
+					}
+				}
 				getProgressLog().setPageIndex(category, items, contentAction);
 				showWindow();
 			}
@@ -109,17 +117,23 @@ public class ProgressLogController {
 	 * Show the description of an item in a category.
 	 *
 	 * @param category
-	 * @param item item to be described
+	 * @param item        item to be described
 	 * @param description description
 	 * @param information information
-	 * @param details paragraphs
+	 * @param details     paragraphs
 	 */
-	public void showDescription(final String category, final String item, final String description, final String information, final List<String> details) {
+	public void showDescription(final String category, final String item, final String description,
+			final String information, final List<String> details) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				getProgressLog().setPageContent(category, item, description, information, details);
-				showWindow();
+				if (item.equals("Ados Bank")) {
+					getProgressLog().setPageContent("Bank Chests", item, description, information, details);
+					showWindow();
+				} else {
+					getProgressLog().setPageContent(category, item, description, information, details);
+					showWindow();
+				}
 			}
 		});
 	}

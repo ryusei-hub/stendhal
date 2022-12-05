@@ -24,6 +24,7 @@ import games.stendhal.server.core.events.TurnNotifier;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.quests.*;
 import games.stendhal.server.maps.quests.antivenom_ring.AntivenomRing;
+import games.stendhal.server.maps.quests.bank.*;
 
 /**
  * Loads and manages all quests.
@@ -76,6 +77,7 @@ public class StendhalQuestSystem {
 	 * Initializes the QuestSystem.
 	 */
 	public void init() {
+		loadQuest(new AdosBankChest());
 		//deactivated AdMemoriaInPortfolio
 		//loadQuest(new AdMemoriaInPortfolio());
 		loadQuest(new AdosDeathmatch());
