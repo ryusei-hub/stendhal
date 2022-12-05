@@ -15,10 +15,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import games.stendhal.server.entity.Entity;
+import games.stendhal.server.entity.mapstuff.area.Allotment;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.rule.EntityManager;
 import games.stendhal.server.entity.RPEntity;
+import games.stendhal.server.entity.mapstuff.area.FertileGround;
 import games.stendhal.server.entity.player.Player;
 
 
@@ -80,10 +83,53 @@ public class Shovel extends AreaUseItem {
 						}
 					}
 				}
+			} else {
+				final String zoneName = zone.getName();
+	
+				if (zoneName.contains("kalavan") || zoneName.contains("ados") || zoneName.contains("kirdneh")) {
+					if (isFertileSoilAt(zone, x, y)) {
+						removeSoil(zone, x, y);
+					} else {
+						addSoil(zone, x, y);
+					}
+				}
 			}
 		}
 
 		return true;
+	}
+
+	public boolean removeSoil(final StendhalRPZone zone, final int x, final int y) {
+		if (!isFertileSoilAt(zone, x, y)) {
+			return false;
+		}
+		for (Entity entity : zone.getEntitiesAt(x, y)) {
+			if (entity instanceof FertileGround) {
+				zone.remove(entity);
+				break;
+			} 
+		}
+		return true;
+	}
+
+	public boolean addSoil(final StendhalRPZone zone, final int x, final int y) {
+		if (isFertileSoilAt(zone, x, y)) {
+			return false;
+		}
+		final Allotment al = new Allotment();
+		al.setPosition(x, y);
+		al.setSize(1, 1);
+		zone.add(al);
+		return true;
+	}
+
+	private boolean isFertileSoilAt(final StendhalRPZone zone, final int x, final int y) {
+		for (Entity entity : zone.getEntitiesAt(x, y)) {
+			if (entity instanceof FertileGround) {
+				return true;
+			} 
+		}
+		return false;
 	}
 
 	/**
